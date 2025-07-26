@@ -68,18 +68,38 @@ export default function NaverMapStore({stores} : { stores : Store[] })
             //.filter(store => store.법정동명 === '부평동')
             //.filter(store => store.상권업종대분류명 === '음식')
             .forEach(store => {
+                // 위치 설정
                 const position = new window.naver.maps.LatLng(store.위도, store.경도);
 
+                // 지도 위에 마커 위치
                 const marker = new window.naver.maps.Marker({
                     map,
                     position, // 위도 경도
                 });
 
+                // 클릭했을 때 나올 div를 만들어주고, 변수에 담아서 클릭이벤트에 담는다
+                const infoWindow = new window.naver.maps.InfoWindow({
+                    content:`
+                        <div style="color:black;padding:4px;">
+                            <strong>${store.상호명}</strong>
+                            <br/>
+                            ${store.상권업종대분류명}
+                            <br/>
+                            <span>주소명 : ${store.도로명}</span>
+                        </div>
+                    `
+                })
+                
                 // 마우스 클릭 이벤트 addEventListner
-
+                window.naver.maps.Event.addListener(marker, 'click', ()=>{
+                    // infoWindow 이미 있으면 없애기
+                    if(infoWindow.getMap()){
+                        infoWindow.close();
+                    }else{
+                        infoWindow.open(map, marker);
+                    }
+                });
             });
-
-
         }
 
         // 중복체크용 ID
