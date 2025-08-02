@@ -30,7 +30,7 @@ export {connectDB};         // 몽고DB 연결을 다른 파일에서 사용할 
     const db = (await connectDB).db('데이터베이스명')                   // 필수
 
     let allData = await db.collection('컬렉션명').find().toArray();             // 전체 검색
-    let data = await db.collection('컬렉션명').find({'키':'값'});          // 조건에 맞는 것 검색
+    let data = await db.collection('컬렉션명').findOne({'키':'값'});          // 조건에 맞는 것 검색
     await db.collection('컬렉션명').insertOne({'키1':'값1', '키2':'값2'})   // 새로 입력
     await db.collection('컬렉션명').updateOne({'키':'원래값'}, {$set:{'키':'바꿀값'}});    // 변경
     await db.collection('컬렉션명').deleteOne({'키':'값'});         // 해당 항목 삭제
