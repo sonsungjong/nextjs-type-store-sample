@@ -28,7 +28,7 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
 
             // insertOne
             let db = (await connectDB).db('mydb');          // 데이터베이스 접속
-            let user = await db.collection('user').findOne({'email':email, 'password':password});
+            let user = await db.collection('user').findOne({email:email, password:password});
 
             console.log(user);              // 유저정보 잘 찾아지는지 확인용
 
