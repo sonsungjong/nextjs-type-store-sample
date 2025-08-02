@@ -18,13 +18,15 @@ interface Store
 // csv파일을 읽어서 원하는 부분만 남긴다음 React부분에 전달
 export default async function handler(req : NextApiRequest, res : NextApiResponse)
 {
-    // npm install papaparse
-    // npm install --save-dev @types/papaparse
-    // papaparse (csv읽기 라이브러리)
-    // src/assets/소상공인시장진흥공단_상가(상권)정보_인천_202503.csv
-    // 상호명, 상권업종대분류명, 법정동명, 도로명, 경도, 위도 => 하나의 배열 변수 Store[]
+    // HTTP 보안문제 허용 (CORS)
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    // 읽은 csv 데이터에서 Store 자료형에 해당하는 정보만 Store 배열에 담고
+    if (req.method === "OPTIONS") {
+        return res.status(200).end();
+    }
+
 
     // 응답으로 전송 (RESTAPI 의 GET요청)
     if (req.method !== "GET") {

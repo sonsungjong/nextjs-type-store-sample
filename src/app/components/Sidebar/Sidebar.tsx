@@ -20,14 +20,20 @@ export default function Sidebar()
             
             {/* 제목 */}
             <div className="relative flex h-16 items-center px-4 border-gray-700 border-b">
+                
                 <div className="flex items-center flex-grow">
                     <Home className="h-6 w-6 mr-2" />
                     {isOpen ? (<h2 className="whitespace-nowrap">프로젝트 제목</h2>) : null}
                 </div>
 
                 {/* 토글 버튼 */}
-                <button className="absolute -right-8 w-8 bg-gray-900 h-full flex items-center justify-center
-                cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out rounded-tr-lg rounded-br-lg" onClick={()=>{setIsOpen(!isOpen)}}>
+                <button className="absolute -right-8 w-8
+                 bg-gray-900 h-full flex items-center
+                  justify-center
+                cursor-pointer hover:bg-gray-700 
+                transition-all duration-300 ease-in-out
+                 rounded-tr-lg rounded-br-lg" 
+                 onClick={()=>{setIsOpen(!isOpen)}}>
                     {
                         isOpen ? (<ChevronsLeft className="w-5 h-5"/>):(
                             <ChevronsRight className="w-5 h-5"/>
